@@ -1,0 +1,72 @@
+import java.util.Arrays;
+
+public class MathOperations {
+
+    public static void main(String[] args) {
+        int[][] matrix1 = {
+                {1, 2},
+                {3, 4}
+        };
+        int[][] matrix2 = {
+                {5, 6},
+                {7, 8}
+        };
+
+        System.out.println("Matrix 1:");
+        printMatrix(matrix1);
+        System.out.println("Matrix 2:");
+        printMatrix(matrix2);
+
+        int[][] result = matrixMultiplication(matrix1, matrix2);
+        System.out.println("Matrix Multiplication Result:");
+        printMatrix(result);
+
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int target = 5;
+        int index = binarySearch(arr, target);
+        System.out.println("Binary Search Result:");
+        System.out.println("Index of " + target + " is " + index);
+    }
+
+    public static int[][] matrixMultiplication(int[][] matrix1, int[][] matrix2) {
+        int m1Rows = matrix1.length;
+        int m1Cols = matrix1[0].length;
+        int m2Cols = matrix2[0].length;
+
+        int[][] result = new int[m1Rows][m2Cols];
+
+        for (int i = 0; i < m1Rows; i++) {
+            for (int j = 0; j < m2Cols; j++) {
+                for (int k = 0; k < m1Cols; k++) {
+                    result[i][j] += matrix1[i][k] * matrix2[k][j];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}
